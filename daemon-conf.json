@@ -1,0 +1,6 @@
+{
+	"service"	: "xmpp-sms",
+	"secret"	: "[SECRET]",
+	"server"	: "[SERVER]",
+	"port"		: "tcp:[SERVER]:[PORT]"
+}

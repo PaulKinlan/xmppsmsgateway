@@ -1,0 +1,16 @@
+XMPP SMS Gateway
+================
+
+Welcome to the XMPP SMS Gateway.
+
+This project is designed to allow you to send SMS's through XMPP.
+
+Dependencies
+============
++	Python
++	Twisted Python
++	an XMPP Server such as eJabberd
+
+Current Limitations
+===================
+Messages are one way, you can send but not recieve yet.
