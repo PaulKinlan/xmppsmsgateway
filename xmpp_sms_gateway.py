@@ -93,6 +93,7 @@ class XMPPSMSService(component.Service):
 		factory = ProviderFactory()
 		provider = factory.Create(self.configuration)
 		provider.Send(sms)
+		
 		#Log it out to a CDR type thing.
 		log.msg("%s" % responseData)
 			

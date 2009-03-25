@@ -6,6 +6,7 @@ class WadjaProvider(SMSProvider.SMSProvider):
 	def __init__(self, configuration):
 		self.configuration = configuration
 	
+	@SMSProvider.logging
 	def Send(self, sms):
 		key = self.configuration["key"]
 	
