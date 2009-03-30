@@ -2,6 +2,7 @@
 # Standard Libraries
 import urllib2
 import time
+import re
 
 # General Libraries
 import simplejson
@@ -64,7 +65,7 @@ class XMPPSMSService(component.Service):
 	"""
 	implements(IService)
 	
-	def __init__():
+	def __init__(self):
 		self.configuration = simplejson.load(file("provider-conf.json", "r"))
 
 	def componentConnected(self, xmlstream):
@@ -87,16 +88,15 @@ class XMPPSMSService(component.Service):
 		msg = create_reply(msg)
 
 		self.xmlstream.send(msg) # send the modified domish.Element
-		
-		sms = SMS(msg['to'], '', msg['body'])
+		to = re.sub("@.*", "", msg['from'])
+		sms = SMS(to, '', msg.body)
 
-		factory = ProviderFactory()
+		factory = smsproviders.ProviderFactory()
 		provider = factory.Create(self.configuration)
 		provider.Send(sms)
-		
-		#Log it out to a CDR type thing.
-		log.msg("%s" % responseData)
-			
+
+		log.msg("%s %s" % (msg.body, to))  
+	
 def main():	
 	sms = SMS('447730517944', '', 'TEST MESSAGE')
 	configuration = simplejson.load(file("provider-conf.json", "r"))
